@@ -1,152 +1,91 @@
 # Pixory – AI Private Photo Cloud
 
 <p align="center">
-  <img src="./Docs/logo.png.png" alt="Centered image">
+  <img src="./docs/Docs/logo.png.png" alt="Pixory Logo" width="200">
 </p>
 
+Pixory is a sophisticated, AI-enhanced image management platform designed to automate the organization of personal media. By combining a modern, responsive frontend with a robust Spring Boot backend, Pixory automatically enriches every upload with descriptive metadata and searchable tags using the **Google Gemini AI** pipeline.
 
-Pixory is a full-stack project focused on building a clean, scalable image platform that securely stores photos, enriches them with AI-generated metadata, and presents them through a modern web interface.
+## 🚀 Key Features
 
-This repository acts as the **project hub**, documenting the architecture, journey, and design decisions behind Pixory.
-
----
-
-## Project Scope (v1)
-
-Pixory v1 is intentionally narrow:
-
-> Upload → Store → Analyze → Display
-
-No social features. No fake scale. No buzzwords.
+- **Intelligence-First Gallery**: Automatically generates natural language descriptions and category tags for every image uploaded.
+- **Asynchronous Processing**: High-performance backend architecture that processes heavy AI tasks in the background, keeping the user interface snappy.
+- **Secure Cloud Storage**: Seamless integration with Cloudinary for global CDN delivery and secure binary storage.
+- **Modern Authentication**: Full implementation of JWT (JSON Web Tokens) with a secure Refresh Token rotation flow.
+- **Responsive UX**: Designed with Angular and Tailwind CSS for a fluid experience across desktop, tablet, and mobile devices.
+- **Transactional Notifications**: Automated email workflows for user welcoming and secure password recovery.
 
 ---
 
-## Architecture Overview
+## 🏗️ Architecture
 
-Pixory is split into two independent repositories to reflect real-world application boundaries.
+Pixory is architected as a decoupled system to reflect industrial standards for scalability and maintainability.
 
 ```text
-Pixory (Project Hub)
+Pixory (Monorepo)
 │
-├── 📂 Pixory Backend ──────────► [Spring Boot + AI Pipeline]
-│   └── Repo: pixory-image-cloud-backend
+├── 📂 server/ ────────► [Spring Boot + Gemini AI Pipeline]
 │
-└── 📂 Pixory Frontend ─────────► [Angular + UX]
-    └── Repo: pixory-image-cloud-frontend  
- ```    
+└── 📂 client/ ────────► [Angular + Tailwind CSS + Lucide]
+```
 
-
-This separation enforces:
-- Clear responsibility boundaries
-- Independent development and scaling
-- Realistic production architecture
-
----
-
-## Repositories
-
-### 🔧 Backend – Image Cloud & AI Pipeline
-**Repository:**  
-👉 https://github.com/RohitSalv/pixory-image-cloud-backend
-
-**Responsibilities:**
-- Secure image uploads
-- Cloud storage using Cloudinary
-- AI-based image analysis (descriptions & tags)
-- Metadata persistence using JPA/Hibernate
-- REST API for frontend consumption
-
-**Key Focus:**  
-Scalability, reliability, and AI cost optimization.
+### Core Components
+1. **Frontend (Angular)**: The presentation layer, managing state and providing a "calm" user experience.
+2. **REST API (Spring Boot)**: The orchestrator, handling security, business logic, and third-party integrations.
+3. **AI Engine (Google Gemini)**: The "brain" that analyzes visual content into searchable data.
+4. **Cloud Infrastructure (Cloudinary)**: Handles image transformations and high-availability storage.
+5. **Data Persistence (MySQL)**: Stores relational data, user profiles, and AI-generated metadata.
 
 ---
 
-### 🖼️ Frontend – User Experience & Gallery
-**Repository:**  
-👉 https://github.com/RohitSalv/pixory-image-cloud-frontend
+## 🔧 Technical Stack
 
-**Responsibilities:**
-- Image upload UI with preview
-- Responsive image gallery
-- Display of AI-generated metadata
-- Landing page and application flow
+### **Backend**
+- **Framework**: Spring Boot 3.2.2
+- **Language**: Java 17
+- **AI Engine**: Google Gemini (gemini-2.5-flash)
+- **Security**: Spring Security + JWT (Short/Long lived tokens)
+- **Cloud**: Cloudinary SDK
+- **Database**: Hibernate / Spring Data JPA / MySQL
+- **Email**: JavaMailSender (SMTP)
+- **Utilities**: Lombok, Thumbnailator (Async image resizing)
 
-**Key Focus:**  
-Calm UX, minimal noise, and clear user flow.
-
----
-
-## Technology Stack
-
-![Architecture](./Docs/Architecture.png.png "Architecture Png")
-
-
-### Backend
-- Spring Boot 3.x
-- Java 17
-- Google Gemini 2.5 Flash (AI)
-- Cloudinary
-- MySQL / PostgreSQL
-- Thumbnailator
-
-### Frontend
-- Angular 20+
-- Tailwind CSS v4
-- RxJS
-- Angular Animations
-- Lucide Icons
+### **Frontend**
+- **Framework**: Angular 20+
+- **Styling**: Tailwind CSS v4 (Modern JIT Engine)
+- **State/Async**: RxJS & Angular Signals
+- **Icons**: Lucide Angular
+- **Animations**: Browser Animations Module
 
 ---
 
-## Key Engineering Decisions
+## 📂 Project Structure
 
-### Why Two Repositories?
-Splitting frontend and backend reflects real-world system design, simplifies deployment, and prevents tight coupling between UI and core logic.
-
-### Why AI Image Analysis?
-Manual tagging does not scale. AI-generated descriptions and tags enable searchability and metadata enrichment without user effort.
-
-### Why Narrow v1 Scope?
-Early versions fail when everything feels important. Pixory v1 was constrained to a single, explainable flow to ensure completion and clarity.
+| Folder | Description |
+| :--- | :--- |
+| **[/server](./server)** | The AI-powered Spring Boot API. |
+| **[/client](./client)** | The sleek Angular gallery interface. |
+| **[/docs](./docs)** | Architecture diagrams and project journey documentation. |
 
 ---
 
-## Project Journey
+## 🎯 Why Pixory?
 
-Pixory was not built linearly.
+Pixory was built to demonstrate the convergence of traditional Full-Stack development and the modern AI landscape. It solves the "manual tagging" problem by shifting the cognitive load from the user to the machine, ensuring that a gallery of 1,000 images is just as searchable as a gallery of 10.
 
-The idea started broad (“AI-powered image cloud”), became unmanageable, and was later reduced to a strict v1 definition. Multiple design, storage, and AI-related mistakes were made and corrected.
-
-The full journey, including failures and course corrections, is documented separately:
-
-📄 **PIXORY_JOURNEY.md**  
-Look In JOUNEY_MDs Folder
-
-Theme: *“The Idea Was Clear, the Path Was Not”*
+### Major Learning Outcomes:
+- Implementing **Asynchronous Event-Driven AI Analysis**.
+- Managing secure **JWT Refresh Token flows** in a cross-origin environment.
+- Optimizing **Image Ingestion Pipelines** (Resize -> Upload -> Analyze -> Persist).
+- Writing clean, maintainable, and decoupled codebases.
 
 ---
 
-## Current Status
+## 📄 License & Usage
 
-- Core backend pipeline: ✅ Complete
-- AI analysis & optimization: ✅ Stable
-- Frontend gallery & upload flow: ✅ Complete
-- Advanced search & UX enhancements: 🚧 Planned
-
-This project is considered **v1 complete**, not finished.
+This project is open for investigation and learning. It serves as a comprehensive portfolio piece demonstrating modern system design.
 
 ---
-
-## Why This Project Exists
-
-Pixory exists to demonstrate:
-- Full-stack system thinking
-- AI integration beyond demos
-- Architectural discipline
-- The ability to stop and ship v1
-
----
-
-## License
-
-This project is intended for learning, experimentation, and portfolio demonstration.
+<p align="center">
+  Made with ☕ and Code by Rohit Salve
+</p>

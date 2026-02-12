@@ -1,0 +1,22 @@
+# Build artifacts
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE specific
+.idea/
+.vscode/
+.factorypath
+.springBeans
+
+# Logs
+*.log
+logs/
+
+# Secrets / Environment-specific
+.env
+application-local.properties
+application-dev.properties
