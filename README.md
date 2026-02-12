@@ -1,7 +1,7 @@
 # Pixory – AI Private Photo Cloud
 
 <p align="center">
-  <img src="./docs/Docs/logo.png.png" alt="Pixory Logo" width="200">
+  <img src="./Docs/logo.png.png" alt="Pixory Logo" width="200">
 </p>
 
 Pixory is a sophisticated, AI-enhanced image management platform designed to automate the organization of personal media. By combining a modern, responsive frontend with a robust Spring Boot backend, Pixory automatically enriches every upload with descriptive metadata and searchable tags using the **Google Gemini AI** pipeline.
